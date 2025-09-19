@@ -1,449 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Srijita!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Pacifico', cursive;
-        }
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            width: 100vw;
-            height: 100vh;
-        }
-        .hidden-element {
-            display: none !important;
-        }
-        .book-container {
-            width: 320px;
-            height: 480px;
-            perspective: 1000px;
-            cursor: pointer;
-            transition: all 0.7s ease-in-out;
-            transform: scale(0) rotateY(90deg);
-            opacity: 0;
-            transform-origin: center;
-        }
-        .book-container.is-open {
-            transform: scale(1) rotateY(0deg);
-            opacity: 1;
-        }
-        .book {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 1.5s;
-        }
-        .book.open {
-            transform: rotateY(-180deg);
-        }
-        .cover, .page {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            box-sizing: border-box;
-        }
-        .cover {
-            background: radial-gradient(circle, #FFF 0%, #FFD1DC 100%);
-            color: #333;
-            z-index: 2;
-        }
-        .page {
-            background-color: #F8F4E3;
-            color: #333;
-            transform: rotateY(180deg);
-            z-index: 1;
-            flex-direction: column;
-        }
-        .cake {
-            position: relative;
-            cursor: pointer;
-            width: 250px;
-            height: 200px;
-        }
-        .cake-layer {
-            width: 100%;
-            height: 40px;
-            background: #fbcfe8;
-            border-radius: 50%;
-            position: absolute;
-            left: 0;
-        }
-        .layer-1 { top: 80px; }
-        .layer-2 { top: 110px; transform: scale(0.9); }
-        .layer-3 { top: 140px; transform: scale(0.8); }
-        .icing {
-            width: 100%;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            z-index: 10;
-        }
-        .candle {
-            position: absolute;
-            width: 5px;
-            height: 30px;
-            background: #fde047;
-            top: 40px;
-            border-radius: 2px;
-            transition: transform 0.3s;
-        }
-        .flame {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: radial-gradient(circle, #fcd34d 0%, #ef4444 100%);
-            border-radius: 50%;
-            top: -5px;
-            left: -2.5px;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .lit .flame {
-            opacity: 1;
-        }
-        .candle-1 { left: 50px; }
-        .candle-2 { left: 100px; }
-        .candle-3 { left: 150px; }
-        .candle-4 { left: 200px; }
-
-        @keyframes rise {
-            from {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-500px) rotate(180deg);
-                opacity: 0;
-            }
-        }
-        .balloon {
-            position: absolute;
-            width: 40px;
-            height: 50px;
-            background: #93C5FD;
-            border-radius: 50%;
-            bottom: 0;
-            animation: rise 5s forwards;
-            animation-delay: var(--delay);
-            z-index: 5;
-            transform-origin: bottom center;
-        }
-        .balloon.show {
-            animation-play-state: running;
-        }
-
-        .photo-gallery-container {
-            width: 100%;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .photo-reel {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            animation: scroll-down 30s linear infinite;
-        }
-        .photo-reel img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-            padding: 10px;
-        }
-        @keyframes scroll-down {
-            0% { transform: translateY(0%); }
-            100% { transform: translateY(-100%); }
-        }
-        .message-box {
-            position: absolute;
-            z-index: 20;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            padding: 20px;
-            border-radius: 12px;
-            max-width: 80%;
-            text-align: center;
-            font-size: 1.25rem;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Srijita!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Pacifico', cursive;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+    }
+    .hidden-element { display: none !important; }
+    .book-container {
+      width: 320px;
+      height: 480px;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: all 0.7s ease-in-out;
+      transform: scale(0) rotateY(90deg);
+      opacity: 0;
+      transform-origin: center;
+    }
+    .book-container.is-open {
+      transform: scale(1) rotateY(0deg);
+      opacity: 1;
+    }
+    .book {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1.5s;
+    }
+    .book.open { transform: rotateY(-180deg); }
+    .cover, .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    .cover {
+      background: radial-gradient(circle, #FFF 0%, #FFD1DC 100%);
+      color: #333;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* FIX IS HERE */
+    .page {
+      background-color: #F8F4E3;
+      color: #333;
+      transform: rotateY(180deg);
+      z-index: 1;
+      overflow-y: auto; /* Ensures the page is scrollable */
+      padding-right: 10px;
+      display: block; /* Prevents vertical centering of content */
+    }
+    .cake {
+      position: relative;
+      cursor: pointer;
+      width: 250px;
+      height: 200px;
+    }
+    .cake-layer {
+      width: 100%;
+      height: 40px;
+      background: #fbcfe8;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+    }
+    .layer-1 { top: 80px; }
+    .layer-2 { top: 110px; transform: scale(0.9); }
+    .layer-3 { top: 140px; transform: scale(0.8); }
+    .icing {
+      width: 100%;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      z-index: 10;
+    }
+    .candle {
+      position: absolute;
+      width: 5px;
+      height: 30px;
+      background: #fde047;
+      top: 40px;
+      border-radius: 2px;
+      transition: transform 0.3s;
+    }
+    .flame {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #fcd34d 0%, #ef4444 100%);
+      border-radius: 50%;
+      top: -5px;
+      left: -2.5px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .lit .flame { opacity: 1; }
+    .candle-1 { left: 50px; }
+    .candle-2 { left: 100px; }
+    .candle-3 { left: 150px; }
+    .candle-4 { left: 200px; }
+    @keyframes rise {
+      from { transform: translateY(0) rotate(0deg); opacity: 1; }
+      to { transform: translateY(-500px) rotate(180deg); opacity: 0; }
+    }
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 50px;
+      background: #93C5FD;
+      border-radius: 50%;
+      bottom: 0;
+      animation: rise 5s forwards;
+      animation-delay: var(--delay);
+      z-index: 5;
+      transform-origin: bottom center;
+    }
+    .balloon.show { animation-play-state: running; }
+    .photo-gallery-container {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #111;
+    }
+    .photo-reel {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      animation: scroll-down 30s linear infinite;
+    }
+    .photo-reel img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      padding: 10px;
+    }
+    @keyframes scroll-down {
+      0% { transform: translateY(0%); }
+      100% { transform: translateY(-100%); }
+    }
+    .message-box {
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      padding: 15px 20px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.25rem;
+      color: white;
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen relative overflow-hidden p-4">
 
-    <canvas id="birthday-canvas"></canvas>
+  <canvas id="birthday-canvas"></canvas>
 
-    <div id="main-container" class="relative z-10 text-center space-y-8 flex flex-col items-center">
-        <div id="initial-message" class="transition-opacity duration-1000">
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 text-pink-400 drop-shadow-lg">
-                Hello, Srijita!
-            </h1>
-            <p class="text-lg sm:text-xl text-gray-300">
-                I have something for you😊...
-            </p>
-        </div>
-
-        <div id="pop-up-container" class="transition-all duration-1000 transform scale-0 opacity-0 bg-white text-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 w-full max-w-sm sm:max-w-md mx-auto">
-            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-purple-600">
-                Happy Birthday Dear💕🎂...
-            </h2>
-            <p class="text-gray-600 text-md sm:text-lg">
-                ...Let's celebrate! Pahle party do meri tb aage jana 😀😀
-            </p>
-            <button id="show-cake-btn" class="mt-6 px-6 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105">
-                Next
-            </button>
-        </div>
-
-        <div id="cake-container" class="hidden-element flex flex-col items-center justify-center space-y-8 w-full">
-            <h2 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 text-pink-400 drop-shadow-lg">
-                Cut the cake!
-            </h2>
-            <div id="cake" class="cake">
-                <div class="icing"></div>
-                <div class="cake-layer layer-1"></div>
-                <div class="cake-layer layer-2"></div>
-                <div class="cake-layer layer-3"></div>
-                <div class="candle candle-1"><div class="flame"></div></div>
-                <div class="candle candle-2"><div class="flame"></div></div>
-                <div class="candle candle-3"><div class="flame"></div></div>
-                <div class="candle candle-4"><div class="flame"></div></div>
-            </div>
-        </div>
-
-        <div id="book-container" class="book-container hidden-element flex flex-col justify-center items-center">
-            <div id="book" class="book">
-                <div class="cover">
-                    <h2 class="text-4xl">Happy B'day Dear</h2>
-                </div>
-               <div class="page" style="max-height: 80vh; overflow-y: auto; padding-right: 10px;">
-                <h2 class="text-3xl mb-4">Happy Birthday! 🎉</h2>
-                <p class="text-lg leading-relaxed text-center">
-                 .
-                  .  
-                   . My dearest friend 💖,  
-                 Wishing you a day as beautiful and amazing as your soul 💫💐.  
-                 May this year bring you endless laughter 😄, pure joy ✨, and every little thing that makes your heart happy 💕—you truly deserve it all 🌹.  
-
-                 On this special day 🎂, I just want to thank you from the bottom of my heart ❤️ for always standing by me 🤝, especially in my lowest moments 🌧️➡️☀️. Your presence has been my strength 💪, and I’ll always be grateful for you 🌈.  
-
-                I hope our friendship keeps growing stronger with each passing day 🌻, just like you—strong, kind, and full of love 💖. Having you in my life is one of the greatest blessings 🌟, and I’ll cherish this bond forever 💞✨.  
-               </p>
-              <div class="flex justify-center space-x-4 mt-6 text-2xl">
-              <span role="img" aria-label="party popper">🎉</span>
-              <span role="img" aria-label="birthday cake">🎂</span>
-              <span role="img" aria-label="confetti ball">🎊</span>
-              <span role="img" aria-label="sparkles">✨</span>
-             <span role="img" aria-label="heart">💖</span>
-        </div>
-        </div>
-     </div>
-            <button id="show-photos-btn" class="hidden-element mt-6 px-6 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 transition-colors duration-300 transform hover:scale-105">
-                Next
-            </button>
-        </div>
+  <div id="main-container" class="relative z-10 text-center space-y-8 flex flex-col items-center">
+    <div id="initial-message" class="transition-opacity duration-1000">
+      <h1 class="text-4xl sm:text-6xl font-extrabold mb-4 text-pink-400">Hello, Srijita!</h1>
+      <p class="text-lg sm:text-xl text-gray-300">I have something for you😊...</p>
     </div>
 
-    <div id="photo-gallery-page" class="hidden-element photo-gallery-container">
-        <div class="photo-reel">
-            <img src="https://placehold.co/400x600/FFC0CB/000?text=Photo+1" alt="Placeholder photo 1">
-            <img src="https://placehold.co/400x600/ADD8E6/000?text=Photo+2" alt="Placeholder photo 2">
-            <img src="https://placehold.co/400x600/90EE90/000?text=Photo+3" alt="Placeholder photo 3">
-            <img src="https://placehold.co/400x600/FFFF99/000?text=Photo+4" alt="Placeholder photo 4">
-            <img src="https://placehold.co/400x600/FFA07A/000?text=Photo+5" alt="Placeholder photo 5">
-            <img src="https://placehold.co/400x600/DDA0DD/000?text=Photo+6" alt="Placeholder photo 6">
-        </div>
-        <div class="message-box">
-            <p>I asked you for pics to make it more interactive🙂🙂</p>
-        </div>
+    <div id="pop-up-container" class="transition-all duration-1000 transform scale-0 opacity-0 bg-white text-gray-800 rounded-2xl shadow-xl p-6 sm:p-8 max-w-md">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-purple-600">Happy Birthday Dear💕🎂...</h2>
+      <p class="text-gray-600">...Let's celebrate! Pahle party do meri tb aage jana 😀😀</p>
+      <button id="show-cake-btn" class="mt-6 px-6 py-3 bg-purple-600 text-white rounded-full">Next</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const initialMessage = document.getElementById('initial-message');
-            const popUpContainer = document.getElementById('pop-up-container');
-            const showCakeBtn = document.getElementById('show-cake-btn');
-            const cakeContainer = document.getElementById('cake-container');
-            const cake = document.getElementById('cake');
-            const bookContainer = document.getElementById('book-container');
-            const book = document.getElementById('book');
-            const showPhotosBtn = document.getElementById('show-photos-btn');
-            const photoGalleryPage = document.getElementById('photo-gallery-page');
-            const mainContainer = document.getElementById('main-container');
-            const candles = document.querySelectorAll('.candle');
-            const balloonColors = ['#FCA5A5', '#FDBA74', '#FEF08A', '#86EFAC', '#93C5FD', '#A5B4FC', '#C084FC'];
+    <div id="cake-container" class="hidden-element flex flex-col items-center justify-center space-y-8">
+      <h2 class="text-4xl sm:text-6xl font-extrabold mb-4 text-pink-400">Cut the cake!</h2>
+      <div id="cake" class="cake">
+        <div class="icing"></div>
+        <div class="cake-layer layer-1"></div>
+        <div class="cake-layer layer-2"></div>
+        <div class="cake-layer layer-3"></div>
+        <div class="candle candle-1"><div class="flame"></div></div>
+        <div class="candle candle-2"><div class="flame"></div></div>
+        <div class="candle candle-3"><div class="flame"></div></div>
+        <div class="candle candle-4"><div class="flame"></div></div>
+      </div>
+    </div>
 
-            let bookClickCount = 0;
+    <div id="book-container" class="book-container hidden-element flex flex-col justify-center items-center">
+      <div id="book" class="book">
+        <div class="cover"><h2 class="text-4xl">Happy B'day Dear</h2></div>
+        <div class="page" id="book-page">
+          <h2 class="text-3xl mb-4">Happy Birthday! 🎉</h2>
+          <p class="text-lg leading-relaxed text-center">
+            My dearest friend 💖,<br><br>
+            Wishing you a day as beautiful and amazing as your soul 💫💐.<br>
+            May this year bring you endless laughter 😄, pure joy ✨, and every little thing that makes your heart happy 💕—you truly deserve it all 🌹.<br><br>
+            On this special day 🎂, I just want to thank you from the bottom of my heart ❤️ for always standing by me 🤝, especially in my lowest moments 🌧️➡️☀️.<br>
+            Your presence has been my strength 💪, and I’ll always be grateful for you 🌈.<br><br>
+            I hope our friendship keeps growing stronger with each passing day 🌻, just like you—strong, kind, and full of love 💖.<br>
+            Having you in my life is one of the greatest blessings 🌟, and I’ll cherish this bond forever 💞✨.
+          </p>
+          <div class="flex justify-center space-x-4 mt-6 text-2xl">🎉🎂🎊✨💖</div>
+        </div>
+      </div>
+      <button id="show-photos-btn" class="hidden-element mt-6 px-6 py-3 bg-purple-600 text-white rounded-full">Next</button>
+    </div>
+  </div>
 
-            setTimeout(() => {
-                initialMessage.classList.add('opacity-0');
-                setTimeout(() => {
-                    initialMessage.classList.add('hidden-element');
-                    popUpContainer.classList.remove('scale-0', 'opacity-0');
-                }, 1000);
-            }, 2000);
+  <div id="photo-gallery-page" class="hidden-element photo-gallery-container">
+    <div class="photo-reel">
+      <img src="https://placehold.co/400x600/FFC0CB/000?text=Photo+1" alt="Photo 1">
+      <img src="https://placehold.co/400x600/ADD8E6/000?text=Photo+2" alt="Photo 2">
+      <img src="https://placehold.co/400x600/90EE90/000?text=Photo+3" alt="Photo 3">
+      <img src="https://placehold.co/400x600/FFFF99/000?text=Photo+4" alt="Photo 4">
+      <img src="https://placehold.co/400x600/FFA07A/000?text=Photo+5" alt="Photo 5">
+      <img src="https://placehold.co/400x600/DDA0DD/000?text=Photo+6" alt="Photo 6">
+    </div>
+    <div class="message-box">
+      <p>I asked you for pics to make it more interactive🙂🙂</p>
+    </div>
+  </div>
 
-            showCakeBtn.addEventListener('click', () => {
-                popUpContainer.classList.add('scale-0', 'opacity-0');
-                setTimeout(() => {
-                    popUpContainer.classList.add('hidden-element');
-                    cakeContainer.classList.remove('hidden-element');
-                }, 700);
-            });
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const initialMessage = document.getElementById('initial-message');
+      const popUpContainer = document.getElementById('pop-up-container');
+      const showCakeBtn = document.getElementById('show-cake-btn');
+      const cakeContainer = document.getElementById('cake-container');
+      const cake = document.getElementById('cake');
+      const bookContainer = document.getElementById('book-container');
+      const book = document.getElementById('book');
+      const showPhotosBtn = document.getElementById('show-photos-btn');
+      const photoGalleryPage = document.getElementById('photo-gallery-page');
+      const mainContainer = document.getElementById('main-container');
+      const candles = document.querySelectorAll('.candle');
+      const balloonColors = ['#FCA5A5','#FDBA74','#FEF08A','#86EFAC','#93C5FD','#A5B4FC','#C084FC'];
+      const bookPage = document.getElementById('book-page');
+      let bookClickCount = 0;
 
-            cake.addEventListener('click', () => {
-                candles.forEach(candle => candle.classList.add('lit'));
-                createBalloons(20);
-                setTimeout(() => {
-                    cakeContainer.classList.add('hidden-element');
-                    bookContainer.classList.remove('hidden-element');
-                    setTimeout(() => {
-                        bookContainer.classList.add('is-open');
-                    }, 50);
-                }, 2000);
-            });
+      setTimeout(() => {
+        initialMessage.classList.add('opacity-0');
+        setTimeout(() => {
+          initialMessage.classList.add('hidden-element');
+          popUpContainer.classList.remove('scale-0','opacity-0');
+        }, 1000);
+      }, 2000);
 
-            bookContainer.addEventListener('click', () => {
-                if (!book.classList.contains('open')) {
-                    book.classList.add('open');
-                } else {
-                    book.classList.remove('open');
-                }
-                bookClickCount++;
-                if (bookClickCount >= 2) {
-                    showPhotosBtn.classList.remove('hidden-element');
-                }
-            });
+      showCakeBtn.addEventListener('click', () => {
+        popUpContainer.classList.add('scale-0','opacity-0');
+        setTimeout(() => {
+          popUpContainer.classList.add('hidden-element');
+          cakeContainer.classList.remove('hidden-element');
+        }, 700);
+      });
 
-            showPhotosBtn.addEventListener('click', () => {
-                mainContainer.classList.add('hidden-element');
-                photoGalleryPage.classList.remove('hidden-element');
-            });
+      cake.addEventListener('click', () => {
+        candles.forEach(candle => candle.classList.add('lit'));
+        createBalloons(20);
+        setTimeout(() => {
+          cakeContainer.classList.add('hidden-element');
+          bookContainer.classList.remove('hidden-element');
+          setTimeout(() => {
+            bookContainer.classList.add('is-open');
+            bookPage.scrollTop = 0; // ✅ FIX: Resets scroll to top
+          }, 50);
+        }, 2000);
+      });
 
-            function createBalloons(count) {
-                const body = document.body;
-                for (let i = 0; i < count; i++) {
-                    const balloon = document.createElement('div');
-                    balloon.classList.add('balloon');
-                    balloon.style.left = `${Math.random() * 100}%`;
-                    balloon.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
-                    balloon.style.setProperty('--delay', `${Math.random() * 0.5}s`);
-                    body.appendChild(balloon);
-                }
-            }
-            
-            const canvas = document.getElementById('birthday-canvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let w, h;
+      bookContainer.addEventListener('click', () => {
+        if (!book.classList.contains('open')) {
+          book.classList.add('open');
+          bookPage.scrollTop = 0; // ✅ FIX: Also reset when flipping open
+        } else {
+          book.classList.remove('open');
+        }
+        bookClickCount++;
+        if (bookClickCount >= 2) {
+          showPhotosBtn.classList.remove('hidden-element');
+        }
+      });
 
-            function setupCanvas() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-            }
+      showPhotosBtn.addEventListener('click', () => {
+        mainContainer.classList.add('hidden-element');
+        photoGalleryPage.classList.remove('hidden-element');
+      });
 
-            function Particle(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.vx = Math.random() * 4 - 2;
-                this.vy = Math.random() * 4 - 2;
-                this.alpha = 1;
-                this.decay = 0.015;
-                this.color = color;
-                this.size = Math.random() * 4 + 2;
-                this.isHeart = Math.random() > 0.5;
-            }
+      function createBalloons(count) {
+        const body = document.body;
+        for (let i=0;i<count;i++) {
+          const balloon = document.createElement('div');
+          balloon.classList.add('balloon');
+          balloon.style.left = `${Math.random()*100}%`;
+          balloon.style.background = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+          balloon.style.setProperty('--delay', `${Math.random()*0.5}s`);
+          body.appendChild(balloon);
+        }
+      }
 
-            Particle.prototype.draw = function() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                if (this.isHeart) {
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    ctx.bezierCurveTo(this.x + this.size / 2, this.y - this.size / 2, this.x + this.size, this.y, this.x, this.y + this.size);
-                    ctx.bezierCurveTo(this.x - this.size, this.y, this.x - this.size / 2, this.y - this.size / 2, this.x, this.y);
-                    ctx.closePath();
-                    ctx.fill();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.restore();
-            };
-
-            Particle.prototype.update = function() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.alpha -= this.decay;
-                if (this.alpha <= 0) {
-                    this.alpha = 0;
-                }
-            };
-
-            function createParticles(x, y, count, color) {
-                for (let i = 0; i < count; i++) {
-                    particles.push(new Particle(x, y, color));
-                }
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, w, h);
-                let newParticles = [];
-                for (let i = 0; i < particles.length; i++) {
-                    const p = particles[i];
-                    p.update();
-                    p.draw();
-                    if (p.alpha > 0) {
-                        newParticles.push(p);
-                    }
-                }
-                particles = newParticles;
-                requestAnimationFrame(animate);
-            }
-
-            setInterval(() => {
-                const x = Math.random() * w;
-                const y = Math.random() * h;
-                const colors = ['#F9A8D4', '#C084FC', '#FDBA74', '#93C5FD', '#FCA5A5'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                createParticles(x, y, 50, randomColor);
-            }, 1000);
-
-            window.onload = function() {
-                setupCanvas();
-                animate();
-            };
-
-            window.addEventListener('resize', setupCanvas);
-        });
-    </script>
+      // Background particles
+      const canvas = document.getElementById('birthday-canvas');
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let w, h;
+      function setupCanvas() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+      function Particle(x,y,color){ this.x=x; this.y=y; this.vx=Math.random()*4-2; this.vy=Math.random()*4-2; this.alpha=1; this.decay=0.015; this.color=color; this.size=Math.random()*4+2; this.isHeart=Math.random()>0.5; }
+      Particle.prototype.draw=function(){ ctx.save(); ctx.globalAlpha=this.alpha; ctx.fillStyle=this.color; if(this.isHeart){ ctx.beginPath(); ctx.moveTo(this.x,this.y); ctx.bezierCurveTo(this.x+this.size/2,this.y-this.size/2,this.x+this.size,this.y,this.x,this.y+this.size); ctx.bezierCurveTo(this.x-this.size,this.y,this.x-this.size/2,this.y-this.size/2,this.x,this.y); ctx.closePath(); ctx.fill(); } else { ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); } ctx.restore(); }
+      Particle.prototype.update=function(){ this.x+=this.vx; this.y+=this.vy; this.alpha-=this.decay; if(this.alpha<=0){ this.alpha=0; } }
+      function createParticles(x,y,count,color){ for(let i=0;i<count;i++){ particles.push(new Particle(x,y,color)); } }
+      function animate(){ ctx.clearRect(0,0,w,h); let newParticles=[]; for(let i=0;i<particles.length;i++){ const p=particles[i]; p.update(); p.draw(); if(p.alpha>0){ newParticles.push(p);} } particles=newParticles; requestAnimationFrame(animate);}
+      setInterval(()=>{ const x=Math.random()*w; const y=Math.random()*h; const colors=['#F9A8D4','#C084FC','#FDBA74','#93C5FD','#FCA5A5']; const randomColor=colors[Math.floor(Math.random()*colors.length)]; createParticles(x,y,50,randomColor); },1000);
+      window.onload=function(){ setupCanvas(); animate(); };
+      window.addEventListener('resize',setupCanvas);
+    });
+  </script>
 </body>
 </html>
